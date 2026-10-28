@@ -1,0 +1,37 @@
+# Annotated pipeline.yaml. Place in the experiment folder before the first run
+# (otherwise defaults are written there). Unknown keys are rejected.
+# experiment_dir is filled in automatically from the command line.
+
+raw_patterns: ["*.lsm", "*.czi"]   # raw acquisitions at the folder top level; define stems
+
+# Inputs, relative to the experiment folder. {stem} is substituted per image.
+# A '*' makes a glob that must match exactly one file.
+proj_pattern: "ave_projected_images/{stem}_avgProj.tif"          # written by stage A if missing
+mask_pattern: "ave_projected_images/{stem}_avgProj_cp_masks.tif" # written by stage B if missing
+gp_pattern:   "gp_images/{stem}_gp_images.tif"                    # must already exist (GP is not computed here)
+# e.g. timestamped GP files:  gp_pattern: "GP_{stem}_*.tif"
+
+# Output folders
+qc_dir: qc
+interior_dir: masks_interior
+periphery_dir: mask_PM
+results_dir: results
+
+# Stage B (Cellpose)
+cellpose_model: cyto2
+cellpose_diameter: 100.0   # pixels; scale with magnification
+cellpose_gpu: true
+
+# Stage C (QC). Area bounds are physical (µm²), converted per image.
+min_area_um2: 50.0
+max_area_um2: 3000.0
+min_solidity: 0.8
+max_eccentricity: 0.99
+exclude_border: true
+
+# Stage E (rings). Radii in pixels; scale with magnification.
+erosion_radii: [5, 7, 9]
+erosion_metric: euclidean   # or chebyshev (CellProfiler shrink-by-N == chebyshev N+1)
+
+# Fallback pixel size (µm/px), used only if it cannot be read from the raw file.
+pixel_size_um: null

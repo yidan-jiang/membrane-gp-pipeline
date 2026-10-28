@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+.Rhistory
+.DS_Store
+# microscopy data and pipeline outputs never belong in the repo
+*.lsm
+*.czi
+*.tif
+*.tiff

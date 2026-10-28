@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "membrane-gp-pipeline: automated per-cell plasma-membrane GP measurement"
+type: software
+authors:
+  - family-names: Jiang
+    given-names: Yidan
+    affiliation: European Molecular Biology Laboratory (EMBL)
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/yidan-jiang/membrane-gp-pipeline"
+keywords:
+  - Laurdan
+  - generalized polarization
+  - membrane order
+  - plasma membrane
+  - Cellpose
+  - image analysis

@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "membrane-gp-pipeline"
+version = "1.0.0"
+description = "Per-cell plasma-membrane Laurdan GP measurement: projection, Cellpose segmentation, QC, periphery rings and NaN-aware GP statistics."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Yidan Jiang" }]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-image>=0.19",
+    "tifffile",
+    "pyyaml",
+]
+keywords = ["laurdan", "generalized polarization", "membrane order", "cellpose", "microscopy"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.optional-dependencies]
+# Stage B. Cellpose 4.x removed the cyto/cyto2 `model_type` API used here.
+segment = ["cellpose>=2,<4"]
+# Reading Zeiss .czi raw files (stage A and pixel size).
+czi = ["aicsimageio", "aicspylibczi>=3.0.5"]
+# Stage D, interactive label curation.
+curate = ["napari[all]"]
+test = ["pytest"]
+
+[project.scripts]
+pm-pipeline = "pm_pipeline.run:main"
+pm-curate = "pm_pipeline.curate:main"
+
+[project.urls]
+Repository = "https://github.com/yidan-jiang/membrane-gp-pipeline"
+
+[tool.setuptools]
+packages = ["pm_pipeline"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
