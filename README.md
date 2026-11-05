@@ -187,8 +187,9 @@ If you use this software, please cite it using the metadata in [`CITATION.cff`](
 
 ## Acknowledgements
 
-Parts of the code refactoring, tests and documentation were developed with the assistance
-of an AI coding assistant; all methods and results were reviewed and validated by the author.
+This pipeline was developed with [Claude](https://claude.ai) (Anthropic) as co-author: Claude
+helped write the code, tests and documentation. All methods and results were reviewed and validated
+by the author.
 
 ## License
 
